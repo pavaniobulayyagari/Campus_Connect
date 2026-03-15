@@ -24,16 +24,30 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return stored ? JSON.parse(stored) : null;
   });
 
-  const login = useCallback((username: string, _password: string) => {
-    const found = mockUsers.find(u => u.username === username);
-    if (found) {
-      setUser(found);
-      localStorage.setItem('campus_user', JSON.stringify(found));
-      localStorage.setItem('campus_token', `mock-jwt-${found.id}-${Date.now()}`);
-      return true;
-    }
-    return false;
-  }, []);
+  const login = useCallback((username: string, password: string) => {
+
+  const storedUser = localStorage.getItem('campus_user');
+
+  if (!storedUser) return false;
+
+  const found = JSON.parse(storedUser);
+
+  if (found.username === username) {
+
+    setUser(found);
+
+    localStorage.setItem(
+      'campus_token',
+      `mock-jwt-${found.id}-${Date.now()}`
+    );
+
+    return true;
+  }
+
+  return false;
+
+}, []);
+
 
   const register = useCallback((username: string, email: string, _password: string, role: UserRole) => {
     const newUser: User = { id: `u${Date.now()}`, username, email, role };

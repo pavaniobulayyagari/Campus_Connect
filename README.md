@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 Campus Connect Hub
 Overview
@@ -181,3 +182,6 @@ Event registration system
 Mobile application support
 
 Advanced dashboard for administrators
+=======
+# Campus_Connect
+>>>>>>> cb2a0c8b5a43f6e391c04028694b2ec2bbfe9673
